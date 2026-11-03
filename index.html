@@ -76,7 +76,9 @@ $('format').addEventListener('change',()=>{$('bgRow').classList.toggle('hidden',
 $('removeBtn').addEventListener('click',async()=>{
  if(!originalFile||busy)return;lock(true);clearResult();setStatus('Starting AI engine…');setProgress(1,'Loading background removal engine…');
  try{
-  const {default:removeBackground}=await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm');
+  const imglyModule=await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm');
+  const removeBackground=imglyModule.removeBackground ?? imglyModule.default?.removeBackground ?? imglyModule.default;
+  if(typeof removeBackground!=='function') throw new Error('Background removal library loaded, but its removeBackground function was not found.');
   const model=$('model').value;
   const useGpu=!!navigator.gpu;
   const config={model,device:useGpu?'gpu':'cpu',output:{format:'image/png',quality:1,type:'foreground'},progress:(key,current,total)=>{
