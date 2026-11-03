@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<meta name="description" content="Remove image backgrounds privately in your browser. Export transparent PNG, JPG and WebP.">
+<title>BG Magic Studio — Background Remover</title>
+<style>
+:root{color-scheme:dark;--bg:#080d1b;--panel:#111a2d;--line:#26334d;--muted:#9aa9c2;--text:#f4f7ff;--cyan:#67e8f9;--violet:#a78bfa}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 10% -10%,#243b67 0%,transparent 65%),radial-gradient(800px 500px at 100% 10%,#30245d 0%,transparent 60%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 18px;font-weight:700;transition:.2s}button:disabled{opacity:.45;cursor:not-allowed}.primary{color:#07111e;background:linear-gradient(100deg,var(--cyan),#a5f3fc)}.primary:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.06)}.secondary{background:#202d46;color:#edf4ff;border:1px solid #35445f}.secondary:hover{background:#293a58}
+.wrap{max-width:1120px;margin:auto;padding:28px 22px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:38px}.brand{display:flex;align-items:center;gap:12px;font-weight:850;font-size:20px;letter-spacing:-.5px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(140deg,#67e8f9,#8b5cf6);color:#07111e;font-size:21px}.privacy{color:#b9f5e8;font-size:12px;border:1px solid #235d55;background:#12332f;padding:7px 11px;border-radius:99px}
+.hero{text-align:center;margin:0 auto 30px;max-width:700px}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;letter-spacing:-2px;margin:12px 0}.gradient{background:linear-gradient(90deg,#67e8f9,#c4b5fd);background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:16px;margin:12px 0}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}.panel{background:linear-gradient(180deg,#141f34ed,#10192bed);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0;box-shadow:0 18px 55px #0003}.panel h2{font-size:16px;margin:0 0 14px}.drop{min-height:300px;border:1.5px dashed #536786;border-radius:16px;background:linear-gradient(145deg,#172640,#101a2c);display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;position:relative;overflow:hidden}.drop.drag{border-color:var(--cyan);background:#163247}.upload-inner{max-width:340px}.upload-icon{font-size:43px;margin-bottom:7px}.upload-inner h3{margin:4px 0 6px;font-size:19px}.muted{color:var(--muted)}.tiny{font-size:12px;color:#8798b4}.preview{width:100%;height:100%;max-height:450px;object-fit:contain;display:block}.checker{background-color:#f1f5f9;background-image:linear-gradient(45deg,#d7dee8 25%,transparent 25%),linear-gradient(-45deg,#d7dee8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d7dee8 75%),linear-gradient(-45deg,transparent 75%,#d7dee8 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 8px}.row label{font-size:13px;color:#dce7fa}.field{background:#0b1425;border:1px solid #35445f;color:#eff6ff;border-radius:10px;padding:10px 12px;min-width:0}.field:focus{outline:2px solid #67e8f966;border-color:var(--cyan)}select.field{width:100%}.range{width:100%;accent-color:#67e8f9}.progressbox{margin-top:15px;display:none}.progress-track{height:8px;background:#26344d;border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#67e8f9,#a78bfa);transition:width .25s}.status{font-size:13px;color:#c5d4eb;margin:8px 0 0;min-height:20px}.status.error{color:#fca5a5}.status.ok{color:#86efac}.export{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.export button{width:100%}.help{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.help article{padding:15px;border:1px solid var(--line);border-radius:15px;background:#10192bbd}.help b{display:block;margin-bottom:5px}.help p{margin:0;color:var(--muted);font-size:13px}.footer{text-align:center;color:#7788a5;font-size:12px;margin-top:35px}.hidden{display:none!important}
+@media(max-width:760px){.wrap{padding:18px 14px 40px}.layout{grid-template-columns:1fr}.top{margin-bottom:28px}.panel{padding:15px}.drop{min-height:250px}.help{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><span class="logo">✦</span><span>BG Magic Studio</span></div><span class="privacy">🔒 Private · Runs in your browser</span></header>
+<section class="hero"><div class="eyebrow">AI background remover</div><h1>Make your subject <span class="gradient">stand out.</span></h1><p>Remove backgrounds from photos. Keep your original image dimensions and export in the format you need.</p></section>
+<main class="layout">
+<section class="panel">
+<h2>1. Upload your image</h2>
+<div class="drop" id="drop">
+<div class="upload-inner" id="emptyState"><div class="upload-icon">🖼️</div><h3>Drop an image here</h3><p class="muted">or choose a file from your device</p><button class="primary" id="chooseBtn" type="button">Choose Image</button><p class="tiny">JPG · JPEG · PNG · WEBP · Up to 15 MB</p></div>
+<img id="sourcePreview" class="preview hidden" alt="Original uploaded image">
+</div>
+<input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+<div class="actions"><button class="secondary" id="changeBtn" type="button">Choose / Change Image</button><button class="secondary" id="resetBtn" type="button" disabled>Reset</button><button class="primary" id="removeBtn" type="button" disabled>Remove Background ✨</button></div>
+<div class="row"><label for="model">AI model</label><select id="model" class="field" style="max-width:190px"><option value="isnet_quint8">Faster · ~40 MB</option><option value="isnet_fp16">Detailed · ~80 MB</option></select></div>
+<div class="tiny">The AI model downloads only when you first process an image. Your browser may cache it for later use.</div>
+<div class="progressbox" id="progressBox"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><p class="status" id="progressText">Preparing…</p></div>
+<p class="status" id="status" role="status" aria-live="polite">Choose an image to begin.</p>
+</section>
+<section class="panel">
+<h2>2. Preview & download</h2>
+<div class="drop checker" id="resultArea" style="min-height:300px"><div class="upload-inner" id="resultEmpty"><div class="upload-icon">✂️</div><h3>Your result appears here</h3><p class="muted">Upload a photo and remove its background.</p></div><img id="resultPreview" class="preview hidden" alt="Background removed result"></div>
+<div class="row"><label for="format">Download format</label><select id="format" class="field" style="max-width:150px"><option value="image/png">PNG · Transparent</option><option value="image/jpeg">JPG · Solid background</option><option value="image/webp">WEBP · Smaller file</option></select></div>
+<div class="row" id="bgRow"><label for="bgColor">JPG background colour</label><input id="bgColor" type="color" value="#ffffff" class="field" style="width:60px;height:38px;padding:3px"></div>
+<div class="row"><label for="quality">Export quality <span id="qualityValue">92%</span></label></div><input id="quality" class="range" type="range" min="60" max="100" value="92">
+<div class="export"><button class="primary" id="downloadBtn" type="button" disabled>⬇ Download Image</button><button class="secondary" id="downloadPngBtn" type="button" disabled>⬇ Transparent PNG</button></div>
+<p class="tiny">PNG keeps transparency. JPG needs a solid background. WEBP can keep transparency in supported apps.</p>
+<p class="status" id="downloadStatus" aria-live="polite"></p>
+</section>
+</main>
+<section class="help">
+<article><b>⚡ Faster repeat use</b><p>Model files are cached by your browser after the first successful download.</p></article>
+<article><b>🪄 Preserve the full photo</b><p>Preview uses “contain” sizing; the app does not crop the original image to fit the screen.</p></article>
+<article><b>🔐 Private processing</b><p>Your selected photo is processed locally in your browser and is not uploaded to an app server.</p></article>
+</section>
+<footer class="footer">BG Magic Studio · Independent open-source project · Background removal powered by IMG.LY</footer>
+</div>
+<script type="module">
+const $ = id => document.getElementById(id);
+const fileInput=$('fileInput'), drop=$('drop'), source=$('sourcePreview'), result=$('resultPreview');
+let originalFile=null, resultBlob=null, sourceUrl=null, resultUrl=null, busy=false;
+const setStatus=(message,type='')=>{const el=$('status');el.textContent=message;el.className='status '+type};
+const setProgress=(value,message)=>{$('progressBox').style.display='block';$('progressFill').style.width=Math.max(0,Math.min(100,value))+'%';$('progressText').textContent=message};
+const lock=state=>{busy=state;$('removeBtn').disabled=state||!originalFile;$('chooseBtn').disabled=state;$('changeBtn').disabled=state;$('resetBtn').disabled=state||!originalFile;$('model').disabled=state};
+function clearResult(){if(resultUrl)URL.revokeObjectURL(resultUrl);resultUrl=null;resultBlob=null;result.classList.add('hidden');$('resultEmpty').classList.remove('hidden');$('downloadBtn').disabled=true;$('downloadPngBtn').disabled=true;$('progressBox').style.display='none';$('downloadStatus').textContent=''}
+function loadFile(file){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)){setStatus('Please choose a JPG, PNG or WEBP image.','error');return}
+ if(file.size>15*1024*1024){setStatus('This file is larger than 15 MB. Please choose a smaller image.','error');return}
+ if(sourceUrl)URL.revokeObjectURL(sourceUrl);clearResult();originalFile=file;sourceUrl=URL.createObjectURL(file);source.src=sourceUrl;source.classList.remove('hidden');$('emptyState').classList.add('hidden');$('removeBtn').disabled=false;$('resetBtn').disabled=false;setStatus(file.name+' ready · '+(file.size/1024/1024).toFixed(2)+' MB','ok');
+}
+$('chooseBtn').addEventListener('click',()=>fileInput.click());$('changeBtn').addEventListener('click',()=>fileInput.click());fileInput.addEventListener('change',e=>loadFile(e.target.files?.[0]));
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag')}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag')}));
+drop.addEventListener('drop',e=>loadFile(e.dataTransfer.files?.[0]));
+$('resetBtn').addEventListener('click',()=>{if(sourceUrl)URL.revokeObjectURL(sourceUrl);sourceUrl=null;originalFile=null;source.removeAttribute('src');source.classList.add('hidden');$('emptyState').classList.remove('hidden');fileInput.value='';clearResult();$('removeBtn').disabled=true;$('resetBtn').disabled=true;setStatus('Choose an image to begin.')});
+$('quality').addEventListener('input',e=>$('qualityValue').textContent=e.target.value+'%');
+$('format').addEventListener('change',()=>{$('bgRow').classList.toggle('hidden',$('format').value!=='image/jpeg')});
+$('removeBtn').addEventListener('click',async()=>{
+ if(!originalFile||busy)return;lock(true);clearResult();setStatus('Starting AI engine…');setProgress(1,'Loading background removal engine…');
+ try{
+  const {default:removeBackground}=await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm');
+  const model=$('model').value;
+  const useGpu=!!navigator.gpu;
+  const config={model,device:useGpu?'gpu':'cpu',output:{format:'image/png',quality:1,type:'foreground'},progress:(key,current,total)=>{
+   const pct=total>0?Math.round(current/total*100):0;
+   if(key.startsWith('compute:')){setProgress(80+pct*0.2,'Processing image · '+key.replace('compute:',''))}
+   else{setProgress(Math.min(78,pct*0.78),'Loading AI files · '+key+' · '+pct+'%')}
+  }};
+  setStatus('Processing locally in your browser. Keep this tab open…');
+  resultBlob=await removeBackground(originalFile,config);
+  resultUrl=URL.createObjectURL(resultBlob);result.src=resultUrl;result.classList.remove('hidden');$('resultEmpty').classList.add('hidden');
+  $('downloadBtn').disabled=false;$('downloadPngBtn').disabled=false;setProgress(100,'Done');setStatus('Background removed. Check the edges and download your image.','ok');
+ }catch(err){console.error(err);setStatus('Could not process this image: '+(err?.message||'Unknown error')+'. Try the Faster model or a smaller photo.','error');$('progressText').textContent='Processing failed'}
+ finally{lock(false)}
+});
+async function exportImage(format){
+ if(!resultBlob)return;
+ const status=$('downloadStatus');status.textContent='Preparing download…';
+ try{
+  if(format==='image/png'){saveBlob(resultBlob,'bg-magic-studio.png');status.textContent='PNG download started.';return}
+  const bitmap=await createImageBitmap(resultBlob);const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;const ctx=canvas.getContext('2d');
+  if(format==='image/jpeg'){ctx.fillStyle=$('bgColor').value;ctx.fillRect(0,0,canvas.width,canvas.height)}
+  ctx.drawImage(bitmap,0,0);bitmap.close();
+  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Export failed')),format,Number($('quality').value)/100));
+  saveBlob(blob,format==='image/jpeg'?'bg-magic-studio.jpg':'bg-magic-studio.webp');status.textContent='Download started.';
+ }catch(err){status.textContent='Export failed: '+err.message}
+}
+function saveBlob(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+$('downloadBtn').addEventListener('click',()=>exportImage($('format').value));$('downloadPngBtn').addEventListener('click',()=>exportImage('image/png'));
+</script>
+</body></html>
